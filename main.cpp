@@ -3,11 +3,13 @@
 #include <cmath>
 #include <sstream>
 #include <string>
+const bool debug = false;
 struct Звено {
     int a;
     float k;
     Звено* next;
-    Звено(int ac, float kc, Звено* nextc=nullptr): a(ac), k(kc), next(nextc) {};
+    Звено(int ac, float kc, Звено* nextc=nullptr): a(ac), k(kc), next(nextc) {if (debug) {std::cout<<Colors::green<<"Creating "<<Colors::reset<<this<<std::endl;}};
+    ~Звено() {if (debug) {std::cout<<Colors::red<<"Deleting "<<Colors::reset<<this<<std::endl;}}
 };
 struct Chain {
 private:
