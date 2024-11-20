@@ -49,13 +49,11 @@ public:
         std::stringstream ss;
         Звено* temp = first;
         while (temp != nullptr) {
-            if (temp->k==0) {}
-            else {
-                ss << Colors::скучный << (temp!=first?((temp->k < 0) ? " - " : " + "): ((temp->k < 0) ? "-" : ""));
-                ss << Colors::green << std::fixed << std::setprecision(2)<< fabs(temp->k);
-                ss << Colors::скучный << (temp->a==0?"": "*X^") << Colors::green << temp->a << Colors::reset;
-                temp = temp->next;
-            }
+            ss << Colors::скучный << (temp!=first?((temp->k < 0) ? " - " : " + "): ((temp->k < 0) ? "-" : ""));
+            ss << Colors::green << std::fixed << std::setprecision(2)<< fabs(temp->k);
+            ss << Colors::скучный << (temp->a==0?"": "*X^") << Colors::green << temp->a << Colors::reset;
+            temp = temp->next;
+            
         }
         return ss.str();
     }
