@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cmath>
 #include <sstream>
+#include <string>
 struct Звено {
     int a;
     float k;
@@ -51,7 +52,7 @@ public:
         while (temp != nullptr) {
             ss << Colors::скучный << (temp!=first?((temp->k < 0) ? " - " : " + "): ((temp->k < 0) ? "-" : ""));
             ss << Colors::green << std::fixed << std::setprecision(2)<< fabs(temp->k);
-            ss << Colors::скучный << (temp->a==0?"": "*X^") << Colors::green << temp->a << Colors::reset;
+            ss << Colors::скучный << (temp->a==0?"": (temp->a==1?"*X": "*X^")) << Colors::green << (temp->a==1?"": std::to_string(temp->a)) << Colors::reset;
             temp = temp->next;
             
         }
