@@ -1,5 +1,4 @@
 #include "colors.h"
-#include <iomanip>
 #include <iostream>
 #include <cmath>
 #include <sstream>
@@ -46,19 +45,30 @@ public:
            delete temp;
        }
     }
+    int size() {
+        Звено* temp = first;
+        int counter = 0;
+        while (temp!=nullptr) {
+            counter++;
+            temp=temp->next;
+        }
+        return counter;
+    }
     std::string formula() {
         std::stringstream ss;
         Звено* temp = first;
         while (temp != nullptr) {
             ss << Colors::скучный << (temp!=first?((temp->k < 0) ? " - " : " + "): ((temp->k < 0) ? "-" : ""));
-            ss << Colors::green << std::fixed << std::setprecision(2)<< fabs(temp->k);
-            ss << Colors::скучный << (temp->a==0?"": (temp->a==1?"*X": "*X^")) << Colors::green << (temp->a==1?"": std::to_string(temp->a)) << Colors::reset;
+            //ss.precision(2);
+            ss << Colors::green << fabs(temp->k)*1.;
+            ss << Colors::скучный << (temp->a==0?"": (temp->a==1?"*X": "*X^")) << Colors::green << (temp->a<=1?"": std::to_string(temp->a)) << Colors::reset;
             temp = temp->next;
             
         }
         return ss.str();
     }
     float calc(float x, bool show=false) {
+        if (size()==0) {return 0;}
         float result;
         Звено* temp = first;
         while (temp != nullptr) {
@@ -75,10 +85,12 @@ int main() {
     std::cout<<Colors::clear;
     Chain* цепь = new Chain;
     std::cout<<std::endl<<цепь->formula()<<std::endl;
+    std::cout<<Colors::blue<<"Размер цепи: "<<Colors::reset<<цепь->size()<<std::endl;
     int x;
     std::cout<<Colors::blue<<"Вводи X: "<<Colors::reset;
     std::cin>>x;
     std::cout<<Colors::green<<"Итого: \n" <<Colors::reset<<цепь->calc(x, true)<<std::endl;
+    
     delete цепь;
     return 0;
 }
