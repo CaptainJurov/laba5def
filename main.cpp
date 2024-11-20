@@ -1,4 +1,5 @@
 #include "colors.h"
+#include <cstddef>
 #include <iomanip>
 #include <iostream>
 #include <cmath>
@@ -15,8 +16,10 @@ private:
         float k;
         std::cout<<Colors::blue<<"Вводи коэф на степень "<<n<<": "<<Colors::reset;
         std::cin>>k;
+        std::cout<<Colors::clear;
         if (n==0) {
-            return new Звено(n, k);
+            if (k==0) {return nullptr;}
+            else {return new Звено(n, k);};
         }
         else {
             if (k==0) {
@@ -42,9 +45,9 @@ public:
         while (temp != nullptr) {
             if (temp->k==0) {}
             else {
-                ss << (temp!=first?((temp->k < 0) ? " - " : " + "): ((temp->k < 0) ? "-" : ""));
-                ss << std::fixed << std::setprecision(2)<< fabs(temp->k);
-                ss << (temp->a==0?"": "*X^" + std::to_string(temp->a));
+                ss << Colors::скучный << (temp!=first?((temp->k < 0) ? " - " : " + "): ((temp->k < 0) ? "-" : ""));
+                ss << Colors::green << std::fixed << std::setprecision(2)<< fabs(temp->k);
+                ss << Colors::скучный << (temp->a==0?"": "*X^") << Colors::green << temp->a << Colors::reset;
                 temp = temp->next;
             }
         }
@@ -55,7 +58,7 @@ public:
         Звено* temp = first;
         while (temp != nullptr) {
             if (show) {
-                std::cout<<Colors::red<<temp->k<<"*"<<x<<"^"<<temp->a<<"="<<temp->k*std::pow(x, temp->a)<<Colors::reset<<std::endl;
+                std::cout<<Colors::green<<temp->k<<Colors::скучный<<" * "<<Colors::green<<x<<Colors::скучный<<"^"<<Colors::green<<temp->a<<Colors::скучный<<" = "<<Colors::red<<temp->k*std::pow(x, temp->a)<<Colors::reset<<std::endl;
             }
             result+=temp->k*std::pow(x, temp->a);
             temp = temp->next;
@@ -64,8 +67,9 @@ public:
     }
 };
 int main() {
+    std::cout<<Colors::clear;
     Chain цепь;
-    std::cout<<цепь.formula()<<std::endl;
+    std::cout<<std::endl<<цепь.formula()<<std::endl;
     int x;
     std::cout<<Colors::blue<<"Вводи X: "<<Colors::reset;
     std::cin>>x;
