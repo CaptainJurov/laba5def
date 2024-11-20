@@ -1,11 +1,12 @@
 #include "colors.h"
 #include <iostream>
 #include <cmath>
+#include <ostream>
 #include <sstream>
 #include <string>
 const bool debug = false;
 struct Звено {
-    int a;
+    short int a;
     float k;
     Звено* next;
     Звено(int ac, float kc, Звено* nextc=nullptr): a(ac), k(kc), next(nextc) {if (debug) {std::cout<<Colors::green<<"Creating "<<Colors::reset<<this<<std::endl;}};
@@ -88,11 +89,11 @@ int main() {
     Chain* цепь = new Chain;
     std::cout<<std::endl<<цепь->formula()<<std::endl;
     std::cout<<Colors::blue<<"Размер цепи: "<<Colors::reset<<цепь->size()<<std::endl;
+    std::cout<<Colors::blue<<"Потребление памяти(байт): "<< Colors::reset << sizeof(Chain)+sizeof(Звено)*цепь->size()<<std::endl<<std::endl;
     int x;
     std::cout<<Colors::blue<<"Вводи X: "<<Colors::reset;
     std::cin>>x;
     std::cout<<Colors::green<<"Итого: \n" <<Colors::reset<<цепь->calc(x, true)<<std::endl;
-    
     delete цепь;
     return 0;
 }
