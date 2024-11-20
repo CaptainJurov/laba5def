@@ -18,7 +18,7 @@ private:
         float k;
         std::cout<<Colors::blue<<"Вводи коэф на степень "<<n<<": "<<Colors::reset;
         std::cin>>k;
-        std::cout<<Colors::clear;
+        if (!debug) {std::cout<<Colors::clear;}
         if (n==0) {
             if (k==0) {return nullptr;}
             else {return new Звено(n, k);};
@@ -46,7 +46,8 @@ public:
            Звено* temp = first;
            first = first->next;
            delete temp;
-       }
+        }
+        if (debug) {std::cout<<Colors::red<<"Chain deleted"<<Colors::reset<<std::endl;}
     }
     int size() {
         Звено* temp = first;
@@ -56,6 +57,11 @@ public:
             temp=temp->next;
         }
         return counter;
+    }
+    Звено* last() {
+        Звено* temp = first;
+        while(temp->next!=nullptr) {temp=temp->next;}
+        return temp;
     }
     std::string formula() {
         std::stringstream ss;
@@ -87,6 +93,7 @@ public:
 int main() {
     std::cout<<Colors::clear;
     Chain* цепь = new Chain;
+    
     std::cout<<std::endl<<цепь->formula()<<std::endl;
     std::cout<<Colors::blue<<"Размер цепи: "<<Colors::reset<<цепь->size()<<std::endl;
     std::cout<<Colors::blue<<"Потребление памяти(байт): "<< Colors::reset << sizeof(Chain)+sizeof(Звено)*цепь->size()<<std::endl<<std::endl;
