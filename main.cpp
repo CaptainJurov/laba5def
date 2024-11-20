@@ -38,6 +38,13 @@ public:
         std::cout<<std::endl;
         first = create(n);
     }
+    ~Chain() {
+        while (first != nullptr) {
+           Звено* temp = first;
+           first = first->next;
+           delete temp;
+       }
+    }
     std::string formula() {
         std::stringstream ss;
         Звено* temp = first;
@@ -67,11 +74,12 @@ public:
 };
 int main() {
     std::cout<<Colors::clear;
-    Chain цепь;
-    std::cout<<std::endl<<цепь.formula()<<std::endl;
+    Chain* цепь = new Chain;
+    std::cout<<std::endl<<цепь->formula()<<std::endl;
     int x;
     std::cout<<Colors::blue<<"Вводи X: "<<Colors::reset;
     std::cin>>x;
-    std::cout<<Colors::green<<"Итого: \n" <<Colors::reset<<цепь.calc(x, true)<<std::endl;
+    std::cout<<Colors::green<<"Итого: \n" <<Colors::reset<<цепь->calc(x, true)<<std::endl;
+    delete цепь;
     return 0;
 }
