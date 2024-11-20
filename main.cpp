@@ -1,5 +1,4 @@
 #include "colors.h"
-#include <cstddef>
 #include <iomanip>
 #include <iostream>
 #include <cmath>
